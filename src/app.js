@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const hbs = require('hbs')
+require('dotenv').config()
 
 const app = express()
 
@@ -39,17 +40,36 @@ app.get('/help',(req,res) =>{
 })
 
 
-app.post('/weather', (req, res) => {
+app.get('/weather', (req, res) => {
+    console.log("hello")
     if (!req.query.address) {
         return res.send({
             error: 'You must provide an address!'
         })
     }
 
-    res.send({
-        forecast: 'It is snowing',
-        address: req.query.address
-    })
+    const url = `http://api.weatherstack.com/current?access_key=${process.env.WEATHERSTACK_API_KEY}&query=${encodeURIComponent(req.query.address)}`
+
+    fetch(url)
+        .then(response => response.json())
+        .then(weatherData => {
+            if (weatherData.error) {
+                return res.send({ error: weatherData.error.info })
+            }
+
+            res.send({
+                location: `${weatherData.location.name}, ${weatherData.location.region}, ${weatherData.location.country}`,
+                temperature: weatherData.current.temperature,
+                weather_descriptions: weatherData.current.weather_descriptions[0],
+                humidity: weatherData.current.humidity,
+                wind_speed: weatherData.current.wind_speed,
+                feels_like: weatherData.current.feelslike,
+                uv_index: weatherData.current.uv_index
+            })
+        })
+        .catch(error => {
+            res.send({ error: 'Unable to connect to weather service' })
+        })
 })
 
 

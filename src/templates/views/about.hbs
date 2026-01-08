@@ -4,11 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
-    <title>About</title>
+    <title>{{title}}</title>
 </head>
 <body>
-    {{>header}}
-    <img src="/img/img-5.png">
+    <div class="main-content">
+        {{>header}}
+        <h2>About This Weather App</h2>
+        <p>This is a simple weather application built with Node.js and Express. It allows users to get weather forecasts for any location.</p>
+        <p>Features:</p>
+        <ul>
+            <li>Real-time weather data</li>
+            <li>Easy-to-use interface</li>
+            <li>Responsive design</li>
+        </ul>
+        <img src="/img/img-5.png" alt="Weather illustration">
+    </div>
     {{>footer}}
 </body>
 </html>

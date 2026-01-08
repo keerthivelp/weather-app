@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/styles.css">
-    <title>Help</title>
+    <title>{{title}}</title>
 </head>
 <body>
-    {{>header}}
-    <p>This is Some Helpfull texts</p>
+    <div class="main-content">
+        {{>header}}
+        <h2>Help & FAQ</h2>
+        <h3>How to use the weather app?</h3>
+        <p>Simply enter a location in the search box on the home page and click "Search". You'll get the current weather forecast for that location.</p>
+        <h3>What locations are supported?</h3>
+        <p>You can search for cities, towns, or any valid location address.</p>
+        <h3>Having trouble?</h3>
+        <p>Make sure your location is spelled correctly and try again. If issues persist, contact support.</p>
+    </div>
     {{>footer}}
 </body>
 </html>
